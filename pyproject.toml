@@ -71,6 +71,7 @@ zip-safe = false
 
 [tool.setuptools.packages.find]
 where = ["src/python/library"]
+exclude = ["tests"]
 
 [tool.setuptools.package-data]
 "*" = ["*.so"]

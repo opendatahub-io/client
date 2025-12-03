@@ -24,6 +24,57 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+[project]
+name = "tritonclient"
+dynamic = ["version"]
+description = "Python client library and utilities for communicating with Triton Inference Server"
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.6"
+dependencies = [
+    "numpy>=1.19.1,<2",
+    "python-rapidjson>=0.9.1",
+    "urllib3>=2.0.7",
+]
+
+[project.optional-dependencies]
+grpc = [
+    "grpcio>=1.41.0",
+    "packaging>=14.1",
+    "protobuf>=3.5.0,<5",
+]
+http = [
+    "aiohttp>=3.8.1,<4.0.0",
+    "geventhttpclient>=1.4.4,<=2.0.2",
+]
+cuda = [
+    "cuda-python",
+]
+all = [
+    "grpcio>=1.41.0",
+    "packaging>=14.1",
+    "protobuf>=3.5.0,<5",
+    "aiohttp>=3.8.1,<4.0.0",
+    "geventhttpclient>=1.4.4,<=2.0.2",
+    "cuda-python",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "setuptools_scm>=8.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+fallback_version = "0.0.0"
+
+[tool.setuptools]
+package-dir = {"" = "src/python/library"}
+zip-safe = false
+
+[tool.setuptools.packages.find]
+where = ["src/python/library"]
+
+[tool.setuptools.package-data]
+"*" = ["*.so"]
+
 [tool.codespell]
 # note: pre-commit passes explicit lists of files here, which this skip file list doesn't override -
 # this is only to allow you to run codespell interactively
